@@ -195,7 +195,7 @@ class Controls:
                                         LaneChangeState.laneChangeFinishing]:
       self.events.add(EventName.laneChange)
 
-    if (not CS.canValid and self.sm.frame > 5 / DT_CTRL):
+    if False:
       self.events.add(EventName.canError)
     if self.mismatch_counter >= 200:
       self.events.add(EventName.controlsMismatch)
