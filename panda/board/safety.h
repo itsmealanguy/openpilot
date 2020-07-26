@@ -39,8 +39,8 @@
 #define SAFETY_SUBARU_LEGACY 22U
 #define SAFETY_HYUNDAI_LEGACY 23U
 
-uint16_t current_safety_mode = SAFETY_SILENT;
-const safety_hooks *current_hooks = &nooutput_hooks;
+uint16_t current_safety_mode = SAFETY_HONDA_NIDEC;
+const safety_hooks *current_hooks = &honda_nidec_hooks;
 
 int safety_rx_hook(CAN_FIFOMailBox_TypeDef *to_push){
   return current_hooks->rx(to_push);
