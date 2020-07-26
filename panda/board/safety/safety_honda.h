@@ -364,7 +364,7 @@ static int honda_bosch_fwd_hook(int bus_num, CAN_FIFOMailBox_TypeDef *to_fwd) {
 }
 
 const safety_hooks honda_nidec_hooks = {
-  .init = nooutput_init,
+  .init = honda_nidec_init,
   .rx = default_rx_hook,
   .tx = alloutput_tx_hook,
   .tx_lin = nooutput_tx_lin_hook,
