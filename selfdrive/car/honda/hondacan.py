@@ -10,11 +10,20 @@ def get_lkas_cmd_bus(car_fingerprint, has_relay):
   return 2 if car_fingerprint in HONDA_BOSCH and not has_relay else 0
 
 
-def create_brake_command(packer, apply_brake, pump_on, pcm_override, pcm_cancel_cmd, fcw, idx, car_fingerprint, has_relay, stock_brake):
+def create_brake_command(packer, apply_brake, pcm_override, pcm_cancel_cmd, fcw, idx, car_fingerprint, has_relay, stock_brake):
   # TODO: do we loose pressure if we keep pump off for long?
+  commands = [] #Clarity
+  pump_on = apply_brake > 0 #Clarity: The brake pump algo causes bad braking performance, so we just leave the pump on if the brakes are being called. -wirelessnet2
   brakelights = apply_brake > 0
   brake_rq = apply_brake > 0
   pcm_fault_cmd = False
+
+  #Clarity
+  # This a bit of a hack but clarity brake msg flows into the last byte so
+  # rather than change the fix() function just set accordingly here. #////I never really understood this. I did not write this comment. The fix() function is old and has been removed. -wirelessnet2
+  apply_brake >>= 1
+  if apply_brake & 1:
+    idx += 0x8
 
   values = {
     "COMPUTER_BRAKE": apply_brake,
@@ -32,7 +41,9 @@ def create_brake_command(packer, apply_brake, pump_on, pcm_override, pcm_cancel_
     "AEB_STATUS": 0,
   }
   bus = get_pt_bus(car_fingerprint, has_relay)
-  return packer.make_can_msg("BRAKE_COMMAND", bus, values, idx)
+  #return packer.make_can_msg("BRAKE_COMMAND", bus, values, idx)
+  commands.append(packer.make_can_msg("BRAKE_COMMAND", bus, values, idx))
+  return commands
 
 
 def create_steering_control(packer, apply_steer, lkas_active, car_fingerprint, idx, has_relay):

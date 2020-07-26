@@ -131,7 +131,7 @@ class CarInterface(CarInterfaceBase):
       ret.openpilotLongitudinalControl = False
     else:
       ret.safetyModel = car.CarParams.SafetyModel.hondaNidec
-      ret.enableCamera = is_ecu_disconnected(fingerprint[0], FINGERPRINTS, ECU_FINGERPRINT, candidate, Ecu.fwdCamera) or has_relay
+      ret.enableCamera = True #Clarity: We need to force this to True to make OpenPilot happy. -wirelessnet2
       ret.enableGasInterceptor = 0x201 in fingerprint[0]
       ret.openpilotLongitudinalControl = ret.enableCamera
 
@@ -212,6 +212,21 @@ class CarInterface(CarInterfaceBase):
         ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.3], [0.09]]
       else:
         ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.6], [0.18]]
+        
+    elif candidate == CAR.CLARITY: #Clarity
+      stop_and_go = True
+      ret.mass = 4052. * CV.LB_TO_KG + STD_CARGO_KG
+      ret.wheelbase = 2.75
+      ret.centerToFront = ret.wheelbase * 0.4
+      ret.steerRatio = 16.50  # was 17.03, 12.72 is end-to-end spec
+      ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 0xA00, 0x7800], [0, 2560, 3840]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.0985], [0.033]]
+      tire_stiffness_factor = 1.
+
+      ret.longitudinalTuning.kpBP = [0., 5., 35.]
+      ret.longitudinalTuning.kpV = [3.6, 2.4, 1.5]
+      ret.longitudinalTuning.kiBP = [0., 35.]
+      ret.longitudinalTuning.kiV = [0.54, 0.36]
 
     elif candidate == CAR.ACURA_ILX:
       stop_and_go = False
