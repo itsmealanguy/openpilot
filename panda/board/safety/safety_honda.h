@@ -329,14 +329,15 @@ static int honda_nidec_fwd_hook(int bus_num, CAN_FIFOMailBox_TypeDef *to_fwd) {
   // 0x1FA is brake control, 0x30C is acc hud, 0x33D is lkas hud,
   int bus_fwd = -1;
 
-  if (true) {
-    if (bus_num == 0) {
-      // block stock lkas messages and stock acc messages (if OP is doing ACC)
-      int addr = GET_ADDR(to_fwd);
-      bool is_important = (addr == 0x221) || (addr == 0x255) || (addr == 0x296) || (addr == 0x37B);
-      if (is_important) {
-        bus_fwd = 2;
-      }
+  if (bus_num == 0) {
+    int addr = GET_ADDR(to_fwd);
+    bool is_econ_status = addr == 0x221;
+    bool is_rough_wheel_speed = addr == 0x255;
+    bool is_scm_buttons = addr == 0x296;
+    bool is_wipers = addr == 0x37B;
+    bool forward = is_econ_status || is_rough_wheel_speed || is_scm_buttons || is_wipers;
+    if (forward) {
+      bus_fwd = 2
     }
   }
   return bus_fwd;
