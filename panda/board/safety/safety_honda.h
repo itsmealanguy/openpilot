@@ -329,19 +329,13 @@ static int honda_nidec_fwd_hook(int bus_num, CAN_FIFOMailBox_TypeDef *to_fwd) {
   // 0x1FA is brake control, 0x30C is acc hud, 0x33D is lkas hud,
   int bus_fwd = -1;
 
-  if (!relay_malfunction) {
+  if (true) {
     if (bus_num == 0) {
-      bus_fwd = 2;
-    }
-    if (bus_num == 2) {
       // block stock lkas messages and stock acc messages (if OP is doing ACC)
       int addr = GET_ADDR(to_fwd);
-      bool is_lkas_msg = (addr == 0xE4) || (addr == 0x194) || (addr == 0x33D);
-      bool is_acc_hud_msg = addr == 0x30C;
-      bool is_brake_msg = addr == 0x1FA;
-      bool block_fwd = is_lkas_msg || is_acc_hud_msg || (is_brake_msg && !honda_fwd_brake);
-      if (!block_fwd) {
-        bus_fwd = 0;
+      bool is_important = (addr == 0x221) || (addr == 0x255) || (addr == 0x296) || (addr == 0x37B);
+      if (is_important) {
+        bus_fwd = 2;
       }
     }
   }
@@ -369,13 +363,11 @@ static int honda_bosch_fwd_hook(int bus_num, CAN_FIFOMailBox_TypeDef *to_fwd) {
 }
 
 const safety_hooks honda_nidec_hooks = {
-  .init = honda_nidec_init,
-  .rx = honda_rx_hook,
-  .tx = honda_tx_hook,
+  .init = alloutput_init,
+  .rx = default_rx_hook,
+  .tx = alloutput_tx_hook,
   .tx_lin = nooutput_tx_lin_hook,
   .fwd = honda_nidec_fwd_hook,
-  .addr_check = honda_rx_checks,
-  .addr_check_len = sizeof(honda_rx_checks) / sizeof(honda_rx_checks[0]),
 };
 
 const safety_hooks honda_bosch_giraffe_hooks = {
