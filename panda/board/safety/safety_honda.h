@@ -384,7 +384,7 @@ if (bus_num == 0) {
     bool is_wipers = addr == 0x37B;
     bool forward = is_econ_status || is_rough_wheel_speed || is_scm_buttons || is_wipers;
     if (forward) {
-      bus_fwd = 2
+      bus_fwd = 2;
     }
 }
 
