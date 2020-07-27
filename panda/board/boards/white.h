@@ -78,7 +78,7 @@ void white_set_esp_gps_mode(uint8_t mode) {
       set_gpio_output(GPIOC, 14, 0);
       set_gpio_output(GPIOC, 5, 0);
       break;
-#if !defined(EON) && !defined(GATEWAY)
+#ifndef EON
     case ESP_GPS_ENABLED:
       // ESP ON
       set_gpio_output(GPIOC, 14, 1);
