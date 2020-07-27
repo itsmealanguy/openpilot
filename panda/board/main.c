@@ -831,6 +831,8 @@ int main(void) {
   #ifdef GATEWAY
   set_safety_mode(SAFETY_HONDA_GATEWAY, 0);
   can_init(CAN_NUM_FROM_BUS_NUM(0));
+  can_init(CAN_NUM_FROM_BUS_NUM(1));
+  can_init(CAN_NUM_FROM_BUS_NUM(2));
 #else
   set_safety_mode(SAFETY_SILENT, 0);
 #endif
