@@ -827,7 +827,13 @@ int main(void) {
   TIM2->EGR = TIM_EGR_UG;
   // use TIM2->CNT to read
 
+  // init to SILENT and can silent
+  #ifdef GATEWAY
   set_safety_mode(SAFETY_HONDA_GATEWAY, 0);
+  //can_init(CAN_NUM_FROM_BUS_NUM(0));
+#else
+  set_safety_mode(SAFETY_SILENT, 0);
+#endif
 
   // enable CAN TXs
   current_board->enable_can_transcievers(true);
