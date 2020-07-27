@@ -5,13 +5,8 @@ CFLAGS += -Tstm32_flash.ld
 DFU_UTIL = "dfu-util"
 
 # Compile fast charge (DCP) only not on EON
-ifeq (,$(wildcard /EON))
-  BUILDER = DEV
-else
-  CFLAGS += "-DEON"
-  BUILDER = EON
-  DFU_UTIL = "tools/dfu-util-aarch64"
-endif
+
+BUILDER = DEV
 
 #COMPILER_PATH = /home/batman/Downloads/gcc-arm-none-eabi-9-2020-q2-update/bin/
 CC = $(COMPILER_PATH)arm-none-eabi-gcc
