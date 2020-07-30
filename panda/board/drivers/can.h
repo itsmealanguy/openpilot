@@ -147,6 +147,9 @@ int8_t can_forwarding[] = {2,-1,-1,-1};
 uint32_t can_speed[] = {5000, 5000, 5000, 333};
 #define CAN_MAX 3U
 
+puts("CAN.H PRINTER"); puts("\n");
+puth(can_forwarding); puts("\n");
+
 #define CANIF_FROM_CAN_NUM(num) (cans[num])
 #define CAN_NUM_FROM_CANIF(CAN) ((CAN)==CAN1 ? 0 : ((CAN) == CAN2 ? 1 : 2))
 #define BUS_NUM_FROM_CAN_NUM(num) (bus_lookup[num])

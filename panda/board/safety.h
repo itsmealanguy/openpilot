@@ -303,6 +303,7 @@ int set_safety_hooks(uint16_t mode, int16_t param) {
   if ((set_status == 0) && (current_hooks->init != NULL)) {
     current_hooks->init(param);
   }
+  puts("Status: "); puth(set_status); puts("\n");
   return set_status;
 }
 
