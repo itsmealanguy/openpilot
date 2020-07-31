@@ -377,6 +377,7 @@ void ignition_can_hook(CAN_FIFOMailBox_TypeDef *to_push) {
 // CAN receive handlers
 // blink blue when we are receiving CAN messages
 void can_rx(uint8_t can_number) {
+  UNUSED(can_number);
   CAN_TypeDef *CAN = CAN1;
   uint8_t bus_number = 0;
   while ((CAN->RF0R & CAN_RF0R_FMP0) != 0) {
