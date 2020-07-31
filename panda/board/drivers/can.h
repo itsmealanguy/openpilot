@@ -403,6 +403,7 @@ void can_rx(uint8_t can_number) {
       to_send.RDTR = to_push.RDTR;
       to_send.RDLR = to_push.RDLR;
       to_send.RDHR = to_push.RDHR;
+      puts("SHIT RAN HERE"); puts("\n");
       can_send(&to_send, bus_fwd_num, true);
     }
 
