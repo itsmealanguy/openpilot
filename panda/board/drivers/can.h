@@ -305,7 +305,7 @@ void process_can(uint8_t can_number) {
         can_txd_cnt += 1;
         puts("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 
-        if (true) {
+        if ((CAN->TSR & CAN_TSR_TXOK0) == CAN_TSR_TXOK0) {
           CAN_FIFOMailBox_TypeDef to_push;
           to_push.RIR = CAN->sTxMailBox[0].TIR;
           to_push.RDTR = (CAN->sTxMailBox[0].TDTR & 0xFFFF000FU) | ((CAN_BUS_RET_FLAG | bus_number) << 4);
@@ -332,7 +332,7 @@ void process_can(uint8_t can_number) {
         CAN->TSR |= CAN_TSR_RQCP0;
       }
 
-      if (true) {
+      if (can_pop(can_queues[bus_number], &to_send)) {
         can_tx_cnt += 1;
         // only send if we have received a packet
         CAN->sTxMailBox[0].TDLR = to_send.RDLR;
