@@ -301,7 +301,7 @@ void process_can(uint8_t can_number) {
     if ((CAN->TSR & CAN_TSR_TME0) == CAN_TSR_TME0) {
       // add successfully transmitted message to my fifo
       puts("#########################################\n");
-      if (true) {
+      if ((CAN->TSR & CAN_TSR_RQCP0) == CAN_TSR_RQCP0) {
         can_txd_cnt += 1;
         puts("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 
