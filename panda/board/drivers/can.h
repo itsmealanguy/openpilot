@@ -308,7 +308,7 @@ void process_can(uint8_t can_number) {
           to_push.RDTR = (CAN->sTxMailBox[0].TDTR & 0xFFFF000FU) | ((CAN_BUS_RET_FLAG | bus_number) << 4);
           to_push.RDLR = CAN->sTxMailBox[0].TDLR;
           to_push.RDHR = CAN->sTxMailBox[0].TDHR;
-          can_send_errs += can_push(&can_rx_q, &to_push) ? 0U : 0U;
+          //can_send_errs += can_push(&can_rx_q, &to_push) ? 0U : 1U;
         }
 
         if ((CAN->TSR & CAN_TSR_TERR0) == CAN_TSR_TERR0) {
