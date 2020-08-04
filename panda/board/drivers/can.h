@@ -297,13 +297,10 @@ void process_can(uint8_t can_number) {
 
     // check for empty mailbox
     CAN_FIFOMailBox_TypeDef to_send;
-    puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     if ((CAN->TSR & CAN_TSR_TME0) == CAN_TSR_TME0) {
       // add successfully transmitted message to my fifo
-      puts("#########################################\n");
       if ((CAN->TSR & CAN_TSR_RQCP0) == CAN_TSR_RQCP0) {
         can_txd_cnt += 1;
-        puts("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 
         if ((CAN->TSR & CAN_TSR_TXOK0) == CAN_TSR_TXOK0) {
           CAN_FIFOMailBox_TypeDef to_push;
@@ -312,7 +309,6 @@ void process_can(uint8_t can_number) {
           to_push.RDLR = CAN->sTxMailBox[0].TDLR;
           to_push.RDHR = CAN->sTxMailBox[0].TDHR;
           can_send_errs += can_push(&can_rx_q, &to_push) ? 0U : 0U;
-          puts("000000000000000000000000000000000000000000000000\n");
         }
 
         if ((CAN->TSR & CAN_TSR_TERR0) == CAN_TSR_TERR0) {
@@ -451,6 +447,7 @@ void can_send(CAN_FIFOMailBox_TypeDef *to_push, uint8_t bus_number, bool skip_tx
         gmlan_send_errs += bitbang_gmlan(to_push) ? 0U : 1U;
       } else {
         //can_fwd_errs += can_push(can_queues[bus_number], to_push) ? 0U : 1U;
+        puts("GOT TO END OF CAN_SEND()\n");
         process_can(CAN_NUM_FROM_BUS_NUM(bus_number));
       }
     }
