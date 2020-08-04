@@ -447,7 +447,6 @@ void can_send(CAN_FIFOMailBox_TypeDef *to_push, uint8_t bus_number, bool skip_tx
         gmlan_send_errs += bitbang_gmlan(to_push) ? 0U : 1U;
       } else {
         //can_fwd_errs += can_push(can_queues[bus_number], to_push) ? 0U : 1U;
-        puts("GOT TO END OF CAN_SEND()\n");
         process_can(CAN_NUM_FROM_BUS_NUM(bus_number));
       }
     }
