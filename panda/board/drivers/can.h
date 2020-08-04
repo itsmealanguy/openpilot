@@ -308,7 +308,7 @@ void process_can(uint8_t can_number) {
           to_push.RDTR = (CAN->sTxMailBox[0].TDTR & 0xFFFF000FU) | ((CAN_BUS_RET_FLAG | bus_number) << 4);
           to_push.RDLR = CAN->sTxMailBox[0].TDLR;
           to_push.RDHR = CAN->sTxMailBox[0].TDHR;
-          //can_send_errs += can_push(&can_rx_q, &to_push) ? 0U : 1U;
+          can_send_errs += can_push(&can_rx_q, &to_push) ? 0U : 1U;
         }
 
         if ((CAN->TSR & CAN_TSR_TERR0) == CAN_TSR_TERR0) {
@@ -406,11 +406,11 @@ void can_rx(uint8_t can_number) {
       can_send(&to_send, bus_fwd_num, true);
     }
 
-    //can_rx_errs += safety_rx_hook(&to_push) ? 0U : 1U;
+    can_rx_errs += safety_rx_hook(&to_push) ? 0U : 1U;
     ignition_can_hook(&to_push);
 
     current_board->set_led(LED_BLUE, true);
-    //can_send_errs += can_push(&can_rx_q, &to_push) ? 0U : 1U;
+    can_send_errs += can_push(&can_rx_q, &to_push) ? 0U : 1U;
 
     // next
     CAN->RF0R |= CAN_RF0R_RFOM0;
@@ -446,7 +446,7 @@ void can_send(CAN_FIFOMailBox_TypeDef *to_push, uint8_t bus_number, bool skip_tx
       if ((bus_number == 3U) && (can_num_lookup[3] == 0xFFU)) {
         gmlan_send_errs += bitbang_gmlan(to_push) ? 0U : 1U;
       } else {
-        //can_fwd_errs += can_push(can_queues[bus_number], to_push) ? 0U : 1U;
+        can_fwd_errs += can_push(can_queues[bus_number], to_push) ? 0U : 1U;
         process_can(CAN_NUM_FROM_BUS_NUM(bus_number));
       }
     }
