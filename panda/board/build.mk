@@ -5,6 +5,7 @@ CFLAGS += -Tstm32_flash.ld
 DFU_UTIL = "dfu-util"
 
 BUILDER = DEV
+CFLAGS += "-DDEBUG"
 
 #COMPILER_PATH = /home/batman/Downloads/gcc-arm-none-eabi-9-2020-q2-update/bin/
 CC = $(COMPILER_PATH)arm-none-eabi-gcc
