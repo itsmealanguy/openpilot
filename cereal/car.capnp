@@ -114,10 +114,9 @@ struct CarEvent @0x9b1657f34caf3ad3 {
     modeldLagging @89;
     deviceFalling @90;
     manualSteeringRequired @91;
-    manualSteeringRequired @92;
-    acceleratorDisabled @93;
-    lkasOnly @94;
-    longPreEnable @95;
+    acceleratorDisabled @92;
+    lkasOnly @93;
+    longPreEnable @94;
   }
 }
 
