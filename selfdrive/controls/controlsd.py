@@ -173,12 +173,7 @@ class Controls:
       self.events.add(EventName.lowMemory)
 
     # Handle calibration status
-    cal_status = self.sm['liveCalibration'].calStatus
-    if cal_status != Calibration.CALIBRATED:
-      if cal_status == Calibration.UNCALIBRATED:
-        self.events.add(EventName.calibrationIncomplete)
-      else:
-        self.events.add(EventName.calibrationInvalid)
+    cal_status = Calibration.CALIBRATED
 
     # Handle lane change
     if self.sm['pathPlan'].laneChangeState == LaneChangeState.preLaneChange:
