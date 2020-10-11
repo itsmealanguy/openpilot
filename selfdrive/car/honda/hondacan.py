@@ -123,10 +123,10 @@ def create_ui_commands(packer, pcm_speed, hud, car_fingerprint, is_metric, idx, 
   bus_lkas = get_lkas_cmd_bus(car_fingerprint, has_relay, radar_disabled)
 
   is_eon_metric = Params().get("IsMetric", encoding='utf8') == "1"
-    if is_eon_metric:
-      speed_units = 2
-    else:
-      speed_units = 3
+  if is_eon_metric:
+    speed_units = 2
+  else:
+    speed_units = 3
 
   if openpilot_longitudinal_control:
     if car_fingerprint in HONDA_BOSCH:
