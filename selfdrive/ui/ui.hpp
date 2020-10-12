@@ -123,7 +123,7 @@ typedef struct UIScene {
   float output_scale;
   float steeringTorqueEps;
   float aEgo;
-  float cpu0Temp;
+  float cpuTemp;
   int cpuPerc;
 
   cereal::HealthData::HwType hwType;

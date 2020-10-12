@@ -207,7 +207,7 @@ void update_sockets(UIState *s) {
   }
   if (sm.updated("thermal")) {
     scene.thermal = sm["thermal"].getThermal();
-    s->scene.cpu0Temp = scene.thermal.getCpu0();
+    s->scene.cpuTemp = scene.thermal.getCpu();
     s->scene.cpuPerc = scene.thermal.getCpuPerc();
   }
   if (sm.updated("ubloxGnss")) {
