@@ -880,7 +880,7 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
 
 static void bb_ui_draw_UI(UIState *s)
 {
-  const UIScene *scene = &s->scene;
+  //const UIScene *scene = &s->scene; //Since stuff got hardcoded, this trips unusued-variable error -wirelessnet2
   const int bb_dml_w = 180;
   const int bb_dml_x = (70 + (bdr_is * 2)); //70 is hardcoded for ui_viz_rx, which doesn't exist anymore -wirelessnet2
   const int bb_dml_y = (s->scene.viz_rect.y  + (bdr_is * 1.5)) + 220;
