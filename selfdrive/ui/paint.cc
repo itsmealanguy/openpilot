@@ -554,8 +554,8 @@ static void ui_draw_driver_view(UIState *s) {
 static void ui_draw_vision_brake(UIState *s) { //We should probably refactor this to use ui_draw_circle_image() -wirelessnet2
   const UIScene *scene = &s->scene;
   const int brake_size = 85; //made the Brake Icon a bit smaller -wirelessnet2
-  const int brake_x = (scene->ui_viz_rx + (brake_size * 5) + (bdr_is * 2.5)); //Moved brake icon a bit closer to DM icon -wirelessnet2
-  const int brake_y = (footer_y + ((footer_h - brake_size) / 2));
+  const int brake_x = (((s->scene.viz_rect.x + (s->scene.viz_rect.w - (4 * s->scene.viz_rect.h / 3))) / 2 + 32) + (brake_size * 5) + (bdr_is * 2.5)); //Moved brake icon a bit closer to DM icon -wirelessnet2
+  const int brake_y = (footer_h + ((footer_h - brake_size) / 2));
   const int brake_img_size = (brake_size * 1.5);
   const int brake_img_x = (brake_x - (brake_img_size / 2));
   const int brake_img_y = (brake_y - (brake_size / 4)+border_shifter+25);
@@ -882,7 +882,7 @@ static void bb_ui_draw_UI(UIState *s)
 {
   const UIScene *scene = &s->scene;
   const int bb_dml_w = 180;
-  const int bb_dml_x = (scene->ui_viz_rx + (bdr_is * 2));
+  const int bb_dml_x = (((s->scene.viz_rect.x + (s->scene.viz_rect.w - (4 * s->scene.viz_rect.h / 3))) / 2 + 32) + (bdr_is * 2));
   const int bb_dml_y = (box_y + (bdr_is * 1.5)) + 220;
 
   const int bb_dmr_w = 180;
