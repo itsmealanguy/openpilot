@@ -554,8 +554,8 @@ static void ui_draw_driver_view(UIState *s) {
 static void ui_draw_vision_brake(UIState *s) { //We should probably refactor this to use ui_draw_circle_image() -wirelessnet2
   const UIScene *scene = &s->scene;
   const int brake_size = 85; //made the Brake Icon a bit smaller -wirelessnet2
-  const int brake_x = (70 + (brake_size * 5) + (bdr_is * 2.5)); //Moved brake icon a bit closer to DM icon -wirelessnet2 //70 is hardcoded value for ui_viz_rx, which doesn't exist anymore
-  const int brake_y = (790 + ((footer_h - brake_size) / 2)); //790 is hardcoded value for footer_y, which no longer exists as a variable. This crap really needs a refactor -wirelessnet2
+  const int brake_x = (s->scene.viz_rect.x + (brake_size * 5) + (bdr_is * 2.5)); //Moved brake icon a bit closer to DM icon -wirelessnet2
+  const int brake_y = ((s->scene.viz_rect.bottom() - footer_h) + ((footer_h - brake_size) / 2));
   const int brake_img_size = (brake_size * 1.5);
   const int brake_img_x = (brake_x - (brake_img_size / 2));
   const int brake_img_y = (brake_y - (brake_size / 4)+border_shifter+25);
@@ -880,13 +880,13 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
 
 static void bb_ui_draw_UI(UIState *s)
 {
-  //const UIScene *scene = &s->scene; //Since stuff got hardcoded, this trips unusued-variable error -wirelessnet2
+  const UIScene *scene = &s->scene;
   const int bb_dml_w = 180;
-  const int bb_dml_x = (70 + (bdr_is * 2)); //70 is hardcoded for ui_viz_rx, which doesn't exist anymore -wirelessnet2
+  const int bb_dml_x = (s->scene.viz_rect.x + (bdr_is * 2));
   const int bb_dml_y = (s->scene.viz_rect.y  + (bdr_is * 1.5)) + 220;
 
   const int bb_dmr_w = 180;
-  const int bb_dmr_x = 70 + 1840 - bb_dmr_w - (bdr_is * 2); //70 is hardcoded for ui_viz_rx, which doesn't exist anymore, and 1840 is ui_viz_rw -wirelessnet2
+  const int bb_dmr_x = s->scene.viz_rect.x + s->scene.viz_rect.w - bb_dmr_w - (bdr_is * 2);
   const int bb_dmr_y = (s->scene.viz_rect.y + (bdr_is * 1.5)) + 220;
 
   bb_ui_draw_measures_right(s, bb_dml_x, bb_dml_y, bb_dml_w);
