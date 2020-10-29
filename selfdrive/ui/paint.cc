@@ -484,7 +484,7 @@ static void ui_draw_vision_face(UIState *s) {
 
 static void ui_draw_vision_brake(UIState *s) {
   const int brake_size = 80;
-  const int brake_x = (s->scene.viz_rect.x + brake_size + (bdr_is * 2) + 155); //That 55 is kinda random -wirelessnet2
+  const int brake_x = (s->scene.viz_rect.x + brake_size + (bdr_is * 2) + 255); //That 55 is kinda random -wirelessnet2
   const int brake_y = (s->scene.viz_rect.bottom() - footer_h + ((footer_h - brake_size) / 2));
   ui_draw_circle_image(s->vg, brake_x, brake_y+border_shifter+25, brake_size, s->img_brake, s->scene.brakeLights);
 }
@@ -543,7 +543,7 @@ static void ui_draw_driver_view(UIState *s) {
 
   //draw brake icon
   const int brake_size = 85;
-  const int x2 = (valid_frame_x + (brake_size * 5) + (bdr_is * 2.5) + 100);
+  const int x2 = (valid_frame_x + (brake_size * 5) + (bdr_is * 2.5) + 200);
   const int y2 = (box_y + box_h - brake_size - bdr_s - (bdr_s * 1.5));
   ui_draw_circle_image(s->vg, x2, y2+border_shifter+25, brake_size-5, s->img_brake, s->scene.brakeLights);
 }
