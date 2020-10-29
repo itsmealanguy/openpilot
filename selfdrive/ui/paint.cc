@@ -482,6 +482,13 @@ static void ui_draw_vision_face(UIState *s) {
   ui_draw_circle_image(s->vg, face_x, face_y+border_shifter+25, face_size, s->img_face, s->scene.dmonitoring_state.getFaceDetected());
 }
 
+static void ui_draw_vision_brake(UIState *s) {
+  const int brake_size = 80;
+  const int brake_x = (s->scene.viz_rect.x + brake_size + (bdr_is * 2) + 55); //That 55 is kinda random -wirelessnet2
+  const int brake_y = (s->scene.viz_rect.bottom() - footer_h + ((footer_h - brake_size) / 2));
+  ui_draw_circle_image(s->vg, brake_x, brake_y+border_shifter+25, brake_size, s->img_brake, s->scene.brakeLights);
+}
+
 static void ui_draw_driver_view(UIState *s) {
   const UIScene *scene = &s->scene;
   s->scene.uilayout_sidebarcollapsed = true;
@@ -533,8 +540,15 @@ static void ui_draw_driver_view(UIState *s) {
   const int x = (valid_frame_x + face_size + (bdr_s * 2)) + (scene->is_rhd ? valid_frame_w - box_h / 2:0);
   const int y = (box_y + box_h - face_size - bdr_s - (bdr_s * 1.5));
   ui_draw_circle_image(s->vg, x, y+border_shifter+25, face_size-5, s->img_face, scene->dmonitoring_state.getFaceDetected());
+
+  //draw brake icon
+  const int brake_size = 85;
+  const int x = (valid_frame_x + (brake_size * 5) + (bdr_is * 2.5));
+  const int y = (box_y + box_h - brake_size - bdr_s - (bdr_s * 1.5));
+  ui_draw_circle_image(s->vg, x, y+border_shifter+25, brake_size-5, s->img_brake, s->scene.brakeLights);
 }
 
+/*
 static void ui_draw_vision_brake(UIState *s) { //We should probably refactor this to use ui_draw_circle_image() -wirelessnet2
   const UIScene *scene = &s->scene;
   const int brake_size = 85; //made the Brake Icon a bit smaller -wirelessnet2
@@ -561,6 +575,7 @@ static void ui_draw_vision_brake(UIState *s) { //We should probably refactor thi
   nvgFillPaint(s->vg, brake_img);
   nvgFill(s->vg);
 }
+*/
 
 static void ui_draw_vision_header(UIState *s) {
   const Rect &viz_rect = s->scene.viz_rect;
