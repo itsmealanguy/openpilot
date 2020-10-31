@@ -14,12 +14,12 @@ EventName = car.CarEvent.EventName
 #  We recommend that you do not change these numbers from the defaults.
 # ******************************************************************************************
 
-_AWARENESS_TIME = 35.  # passive wheel touch total timeout
-_AWARENESS_PRE_TIME_TILL_TERMINAL = 7.
-_AWARENESS_PROMPT_TIME_TILL_TERMINAL = 5.
-_DISTRACTED_TIME = 11.
-_DISTRACTED_PRE_TIME_TILL_TERMINAL = 8.
-_DISTRACTED_PROMPT_TIME_TILL_TERMINAL = 6.
+_AWARENESS_TIME = 210.  # passive wheel touch total timeout
+_AWARENESS_PRE_TIME_TILL_TERMINAL = 45.
+_AWARENESS_PROMPT_TIME_TILL_TERMINAL = 18.
+_DISTRACTED_TIME = 33.
+_DISTRACTED_PRE_TIME_TILL_TERMINAL = 24.
+_DISTRACTED_PROMPT_TIME_TILL_TERMINAL = 18.
 
 _FACE_THRESHOLD = 0.6
 _EYE_THRESHOLD = 0.6
@@ -37,7 +37,7 @@ _PITCH_NATURAL_OFFSET = 0.02  # people don't seem to look straight when they dri
 _YAW_NATURAL_OFFSET = 0.08  # people don't seem to look straight when they drive relaxed, rather a bit to the right (center of car)
 
 _HI_STD_TIMEOUT = 5
-_HI_STD_FALLBACK_TIME = 10  # fall back to wheel touch if model is uncertain for a long time
+_HI_STD_FALLBACK_TIME = 100  # fall back to wheel touch if model is uncertain for a long time
 _DISTRACTED_FILTER_TS = 0.25  # 0.6Hz
 
 _POSE_CALIB_MIN_SPEED = 13  # 30 mph

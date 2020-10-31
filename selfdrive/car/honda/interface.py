@@ -226,8 +226,8 @@ class CarInterface(CarInterfaceBase):
       ret.centerToFront = ret.wheelbase * 0.4
       ret.steerRatio = 16.50  # was 17.03, 12.72 is end-to-end spec
       if eps_modified_3x:
-        ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 0xA00, 0x3C00], [0, 2560, 3840]]
-        ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.175], [0.0575]]
+        ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 0xA00, 0x7800], [0, 2560, 3840]]
+        ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.0985], [0.033]]
         print("clarity.brUHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH") # @clarity.bru: Hello =P -wirelessnet2
       elif eps_modified:
         ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 0xA00, 0x2800], [0, 2560, 3840]]
